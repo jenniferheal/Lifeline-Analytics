@@ -1,11 +1,7 @@
 import { useState } from 'react'
-import api from '../api'
 import { useNavigate } from 'react-router-dom'
-import { ACCESS_TOKEN, REFRESH_TOKEN } from '../constants'
 
 export default function Forms({ route, method }) {
-  // const [username, setUsername] = useState('')
-  // const [password, setPassword] = useState('')
   const [userInfo, setUserInfo] = useState({
     username: '',
     password: '',
@@ -21,21 +17,6 @@ export default function Forms({ route, method }) {
     e.preventDefault()
 
     const { username, password } = userInfo
-
-    try {
-      const res = await api.post(route, { username, password })
-      if (method === 'login') {
-        localStorage.setItem(ACCESS_TOKEN, res.data.access)
-        localStorage.setItem(REFRESH_TOKEN, res.data.refresh)
-        navigate('/')
-      } else {
-        navigate('/login')
-      }
-    } catch (e) {
-      console.log(e)
-    } finally {
-      setLoading(false)
-    }
   }
 
   const haveAccount = (
