@@ -8,11 +8,11 @@ const app = express()
 app.use(express.json())
 app.use(cookieParser())
 
-app.get('/', (req, res) => {
+app.get('/api/v1/suicides', (req, res) => {
   res.send('Hello World!')
 })
 
-app.use('/api/v1/suicides', suicideRoutes)
+app.use('/api', suicideRoutes)
 
 app.listen(
   5000,

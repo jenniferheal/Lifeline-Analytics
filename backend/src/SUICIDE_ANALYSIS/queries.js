@@ -1,5 +1,5 @@
 // queries.js
-const getSuicides = 'SELECT * FROM suicides';
+const getSuicides = 'SELECT * FROM suicides where suicides = 100'
 
 const insertUserQuery = `
   INSERT INTO users (username, password, email)
@@ -17,14 +17,14 @@ const getAllResourcesQuery = `
   SELECT resources.id, resources.title, resources.description, resources.link, resources.id_country, country.name AS country_name
   FROM resources
   JOIN country ON resources.id_country = country.id;
-`;
+`
 
 const getOneResourceQuery = `
   SELECT resources.id, resources.title, resources.description, resources.link, resources.id_country, country.name AS country_name
   FROM resources
   JOIN country ON resources.id_country = country.id
-  WHERE resources.id = $1;
-`;
+  WHERE resources.id_country = $1;
+`
 
 
 module.exports = {
@@ -33,5 +33,4 @@ module.exports = {
   loginUserQuery,
   getAllResourcesQuery,
   getOneResourceQuery
-};
-
+}

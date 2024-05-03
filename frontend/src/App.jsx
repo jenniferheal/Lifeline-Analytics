@@ -3,6 +3,10 @@ import Login from './pages/Login'
 import Register from './pages/Register'
 import NotFound from './pages/NotFound'
 import Home from './pages/Home'
+import Statistics from './pages/Statistics'
+import Testimonials from './pages/Testimonials'
+import Resources from './pages/Resources'
+
 // import ProtectedRoute from './components/ProtectedRoute'
 
 function Logout() {
@@ -23,6 +27,9 @@ function App() {
           path='/'
           element={<Home />}
         />
+        <Route path='/statistics' element={<Statistics />} />
+        <Route path='/testimonials' element={<Testimonials />} />
+        <Route path='/resources' element={<Resources />} />
         <Route path='/login' element={<Login />} />
         <Route path='/logout' element={<Logout />} />
         <Route path='/register' element={<Register />} />
