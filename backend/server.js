@@ -9,7 +9,7 @@ app.get('/', (req, res) => {
   res.send('Hello World!')
 })
 
-app.use('/api/v1/suicides', suicideRoutes)
+app.use('/', suicideRoutes)
 
 app.listen(
   5000,
