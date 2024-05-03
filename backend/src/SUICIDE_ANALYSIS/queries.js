@@ -1,6 +1,18 @@
 // queries.js
 const getSuicides = 'SELECT * FROM suicides';
 
+const insertUserQuery = `
+  INSERT INTO users (username, password, email)
+  VALUES ($1, $2, $3)
+  RETURNING *;
+`;
+
+const loginUserQuery = `
+  SELECT * FROM users
+  WHERE email = $1;
+`;
+
+
 const getAllResourcesQuery = `
   SELECT resources.id, resources.title, resources.description, resources.link, resources.id_country, country.name AS country_name
   FROM resources
@@ -14,8 +26,11 @@ const getOneResourceQuery = `
   WHERE resources.id = $1;
 `;
 
+
 module.exports = {
   getSuicides,
+  insertUserQuery,
+  loginUserQuery,
   getAllResourcesQuery,
   getOneResourceQuery
 };
