@@ -5,11 +5,11 @@ const app = express()
 
 app.use(express.json())
 
-app.get('/', (req, res) => {
+app.get('/api/v1/suicides', (req, res) => {
   res.send('Hello World!')
 })
 
-app.use('/', suicideRoutes)
+app.use('/api', suicideRoutes)
 
 app.listen(
   5000,

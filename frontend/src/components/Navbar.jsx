@@ -5,9 +5,9 @@ export default function Navbar() {
 
   const Links = [
     { name: 'Home', link: '/' },
-    { name: 'Statistics', link: '/' },
-    { name: 'Resources', link: '/' },
-    { name: 'Testimonials', link: '/' },
+    { name: 'Statistics', link: '/statistics' },
+    { name: 'Resources', link: '/resources' },
+    { name: 'Testimonials', link: '/testimonials' },
     { name: 'Login', link: '/login' }
   ]
 

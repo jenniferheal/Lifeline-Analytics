@@ -20,9 +20,10 @@ const getAllResources = (req, res) => {
 }
 
 const getOneResource = (req, res) => {
-  const resourceId = parseInt(req.params.id)
-  if (isNaN(resourceId)) {
-    return res.status(400).json({ error: 'Invalid ID format' })
+  const resourceId = req.params.id
+  console.log(resourceId)
+  if (resourceId.length !== 3) {
+    return res.status(400).json({ error: 'Invalid ID format', id: resourceId })
   }
   pool.query(queries.getOneResourceQuery, [resourceId], (error, results) => {
     if (error) {
