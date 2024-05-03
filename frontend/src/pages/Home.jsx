@@ -1,6 +1,13 @@
 import Navbar from '../components/Navbar'
 import Footer from '../components/Footer'
+import { useEffect } from 'react'
 export default function Home() {
+  useEffect(() => {
+    fetch('/api/v1/suicides')
+      .then((res) => res.json())
+      .then((data) => console.log(data))
+  }, [])
+
   return (
     <>
       <Navbar />
