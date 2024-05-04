@@ -22,7 +22,7 @@ export default function Navbar() {
   )
 
   return (
-    <div className='shadow-md w-full sticky top-0 left-0'>
+    <div className='shadow-md w-full sticky top-0 left-0 z-50'>
       <div className='md:flex items-center justify-between bg-[#204B57] py-4 md:px-10 px-7'>
         <div className='font-bold text-xl cursor-pointer flex items-center font-[Poppins]
     text-[#F1F1E6]'
