@@ -1,12 +1,16 @@
 import { useState } from 'react'
 import { useNavigate } from 'react-router-dom'
+import Select from 'react-select'
+import { countries } from '../../mocks/countries'
 
 export default function Forms({ route, method }) {
   const [userInfo, setUserInfo] = useState({
     username: '',
+    email: '',
     password: '',
-    country: ''
+    countryCode: ''
   })
+
   const [loading, setLoading] = useState(false)
   const navigate = useNavigate()
 
@@ -15,12 +19,23 @@ export default function Forms({ route, method }) {
   const handleSubmit = async (e) => {
     setLoading(true)
     e.preventDefault()
-
-    const { username, password } = userInfo
+    console.log(userInfo)
+    const { username, email, password } = userInfo
   }
 
+  const handleInputChange = (e) => {
+    const { name, value } = e.target
+    setUserInfo({ ...userInfo, [name]: value })
+  }
+
+  const handleSelectChange = (selectedOption) => {
+    setUserInfo({ ...userInfo, countryCode: selectedOption.value })
+  }
+
+  const selectedCountry = countries.find(country => country.value === userInfo.countryCode)
+
   const haveAccount = (
-    <div className='flex flex-col gap-1 items-center w-full mx-auto text-gray-500'>
+    <div className='flex flex-col gap-1 items-center w-full mb-5 mx-auto text-gray-500'>
       {method === 'login'
         ? <p>Don't have an account?</p>
         : <p>Already have an account?</p>}
@@ -35,18 +50,7 @@ export default function Forms({ route, method }) {
   )
 
   const inputClass = 'rounded-md h-[2rem] px-2 w-4/5 mx-auto'
-  const loginDivSize = method === 'login' ? 'h-[23.5rem]' : 'h-[27rem]'
-
-  const registerCountryInput = (
-    <input
-      type='text'
-      value={userInfo.country}
-      onChange={(e) => setUserInfo(e.target.value)}
-      placeholder='Enter your country'
-      className={inputClass}
-    />
-
-  )
+  const loginDivSize = method === 'login' ? 'h-[25rem]' : 'h-[29rem]'
 
   return (
     <>
@@ -59,22 +63,42 @@ export default function Forms({ route, method }) {
           <h1 className='text-4xl text-center text-white font-semibold'>{name}</h1>
         </div>
         <div />
+
         <input
           type='text'
+          name='username'
           value={userInfo.username}
-          onChange={(e) => setUserInfo(e.target.value)}
+          onChange={handleInputChange}
           placeholder='Username'
           className={inputClass}
         />
+
+        <input
+          type='email'
+          name='email'
+          value={userInfo.email}
+          onChange={handleInputChange}
+          placeholder='Email'
+          className={inputClass}
+        />
+
         <input
           type='password'
+          name='password'
           value={userInfo.password}
-          onChange={(e) => setUserInfo(e.target.value)}
+          onChange={handleInputChange}
           placeholder='Password'
           className={inputClass}
         />
 
-        {method === 'register' && registerCountryInput}
+        {method === 'register' &&
+          <Select
+            options={countries}
+            name='countryCode'
+            value={selectedCountry}
+            onChange={handleSelectChange}
+            className='w-4/5 mx-auto'
+          />}
 
         <button
           type='submit' className='bg-[#A9D4E2] w-1/3 mt-2 mx-auto font-bold text-[#204B57] text-lg font-[Poppins] py-2 px-2
