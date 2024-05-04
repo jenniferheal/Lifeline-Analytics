@@ -2,15 +2,24 @@ import Navbar from '../components/Navbar'
 import Footer from '../components/Footer'
 import getCountryISO2 from 'country-iso-3-to-2'
 import { useEffect, useState } from 'react'
+import { countriesForResources } from '../../mocks/countries'
+import Select from 'react-select'
 
 export default function Resources() {
   const [resources, setResources] = useState([])
+  const [countryChoice, setCountryChoice] = useState('ALL')
 
   useEffect(() => {
-    fetch('/api/v1/suicides')
-      .then((res) => res.json())
-      .then((data) => setResources(data))
-  }, [])
+    if (countryChoice === 'ALL') {
+      fetch('/api/resources')
+        .then((res) => res.json())
+        .then((data) => setResources(data))
+    } else {
+      fetch(`/api/resources/${countryChoice.countryCode}`)
+        .then((res) => res.json())
+        .then((data) => setResources(data))
+    }
+  }, [countryChoice])
 
   const resource = (
     resources.map((resource) => {
@@ -37,16 +46,34 @@ export default function Resources() {
         </div>
       )
     })
+  )
 
+  const handleSelectChange = (selectedOption) => {
+    setCountryChoice({ countryCode: selectedOption.value })
+  }
+
+  const selectedCountry = countriesForResources.find(country => country.value === countryChoice)
+
+  const selectCountry = (
+    <Select
+      options={countriesForResources}
+      name='countryCode'
+      value={selectedCountry}
+      onChange={handleSelectChange}
+      className='w-1/3'
+    />
   )
 
   return (
     <>
       <Navbar />
       <h1 className='text-center text-6xl my-8'>Resources</h1>
-
+      <div className='flex flex-col items-end w-[80%] mx-auto'>
+        <h2 className='text-xl text-slate-600 mb-3 '>Filter by Country</h2>
+        {selectCountry}
+      </div>
       <main className='bg-[#A9D4E2] py-4 w-[95%] md:w-[80%] mx-auto rounded-md my-6 mb-[8rem]'>
-        {resource}
+        {resource === null ? resource : <h1 className='text-center'>There are no resources available for this country</h1>}
       </main>
 
       <Footer />
