@@ -1,7 +1,9 @@
 import { useState } from 'react'
+import LogoutButton from './LogoutButton'
 
 export default function Navbar() {
   const [isOpen, setIsOpen] = useState(false)
+  const token = localStorage.getItem('jwtToken')
 
   const Links = [
     { name: 'Home', link: '/' },
@@ -19,6 +21,16 @@ export default function Navbar() {
     isOpen
       ? <i className='fa-solid fa-xmark text-3xl text-[#F1F1E6] cursor-pointer md:hidden' />
       : <i className='fa-solid fa-bars text-3xl text-[#F1F1E6] cursor-pointer md:hidden' />
+  )
+
+  const signupButton = (
+    <a
+      href='/register'
+      className='bg-[#F89236] text-white font-[Poppins] py-2 px-6
+                    rounded md:ml-8 hover:bg-[#d1792d] duration-500'
+    >
+      Sign Up
+    </a>
   )
 
   return (
@@ -42,13 +54,10 @@ export default function Navbar() {
               </li>
             ))
           }
-          <a
-            href='/register'
-            className='bg-[#F89236] text-white font-[Poppins] py-2 px-6
-            rounded md:ml-8 hover:bg-[#d1792d] duration-500'
-          >
-            Sign Up
-          </a>
+          {!token
+            ? signupButton
+            : <LogoutButton />}
+
         </ul>
       </div>
     </div>

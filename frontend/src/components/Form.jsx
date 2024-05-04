@@ -19,8 +19,24 @@ export default function Forms({ route, method }) {
   const handleSubmit = async (e) => {
     setLoading(true)
     e.preventDefault()
-    console.log(userInfo)
-    const { username, email, password } = userInfo
+
+    const response = await fetch('/api/signup', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify(userInfo)
+    })
+
+    if (response.ok) {
+      const data = await response.json()
+      localStorage.setItem('jwtToken', data.token)
+      navigate('/')
+    } else {
+      const errorData = await response.json() // Obtiene el cuerpo de la respuesta como JSON
+      console.error('Error:', response.status, response.statusText, errorData.error)
+      // Aquí puedes manejar los errores
+    }
   }
 
   const handleInputChange = (e) => {
