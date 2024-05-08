@@ -8,7 +8,7 @@ export default function Register() {
     <>
 
       <Navbar />
-      <Form route='/api/user/register/' method='register' />
+      <Form route='/api/user/register/' route='signup' />
       <Footer />
 
     </>

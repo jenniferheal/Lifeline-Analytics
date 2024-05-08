@@ -16,3 +16,14 @@ export function handleLogout() {
       throw error
     })
 }
+
+export async function postLoginSignupData(formRoute, userInfo) {
+  const response = await fetch(`/api/${formRoute}`, {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json'
+    },
+    body: JSON.stringify(userInfo)
+  })
+  return response
+}

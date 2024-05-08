@@ -6,7 +6,7 @@ export default function Login() {
   return (
     <>
       <Navbar />
-      <Form route='/api/token/' method='login' />
+      <Form route='/api/token/' route='login' />
       <Footer />
 
     </>
