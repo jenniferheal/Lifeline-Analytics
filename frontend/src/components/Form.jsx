@@ -2,6 +2,7 @@ import { useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 import Select from 'react-select'
 import { countries } from '../../mocks/countries'
+import { postLoginSignupData } from '../services/api'
 
 export default function Forms({ route, method }) {
   const [userInfo, setUserInfo] = useState({
@@ -11,6 +12,8 @@ export default function Forms({ route, method }) {
     countryCode: ''
   })
 
+  const formRoute = route
+
   const [loading, setLoading] = useState(false)
   const navigate = useNavigate()
 
@@ -19,8 +22,19 @@ export default function Forms({ route, method }) {
   const handleSubmit = async (e) => {
     setLoading(true)
     e.preventDefault()
-    console.log(userInfo)
-    const { username, email, password } = userInfo
+    console.log(formRoute)
+
+    const response = await postLoginSignupData(formRoute, userInfo)
+
+    if (response.ok) {
+      const data = await response.json()
+      localStorage.setItem('jwtToken', data.token)
+      navigate('/')
+    } else {
+      const errorData = await response.json() // Obtiene el cuerpo de la respuesta como JSON
+      console.error('Error:', response.status, response.statusText, errorData.error)
+      // Aquí puedes manejar los errores
+    }
   }
 
   const handleInputChange = (e) => {
@@ -91,7 +105,7 @@ export default function Forms({ route, method }) {
           className={inputClass}
         />
 
-        {method === 'register' &&
+        {method === 'signup' &&
           <Select
             options={countries}
             name='countryCode'

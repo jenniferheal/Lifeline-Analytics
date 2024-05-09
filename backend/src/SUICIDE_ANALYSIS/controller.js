@@ -5,11 +5,11 @@ const queries = require('./queries')
 require('dotenv').config()
 
 const signup = async (req, res) => {
-  const { username, password, email } = req.body
+  const { username, password, email, countryCode } = req.body
 
   try {
     // Validate input data
-    if (!username || !password || !email) {
+    if (!username || !password || !email || !countryCode) {
       return res.status(400).json({ error: 'All fields are required' })
     }
 
@@ -27,7 +27,7 @@ const signup = async (req, res) => {
     const hashedPassword = await bcrypt.hash(password, 10)
 
     // Save the user with the hashed password to the database
-    const newUser = await pool.query(queries.insertUserQuery, [username, hashedPassword, email])
+    const newUser = await pool.query(queries.insertUserQuery, [username, hashedPassword, email, countryCode])
 
     // Generate a JWT token
     const token = jwt.sign({ userId: newUser.rows[0].id }, process.env.secretKey)
@@ -56,7 +56,7 @@ const login = async (req, res) => {
     // Compare hashed password with user input
     const isPasswordValid = await bcrypt.compare(password, user.rows[0].password)
     if (!isPasswordValid) {
-      return res.status(400).json({ error: 'Invalid email or password 2' })
+      return res.status(400).json({ error: 'Invalid email or password' })
     }
 
     // Generate JWT token with user's ID
@@ -80,7 +80,6 @@ const logout = (req, res) => {
   try {
     // Clear the cookie containing the JWT token
     res.clearCookie('jwtToken')
-
     // Respond with a message indicating that the user has logged out successfully
     res.status(200).json({ message: 'User logged out successfully' })
   } catch (error) {
