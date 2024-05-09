@@ -14,22 +14,22 @@ export default function LoginLogoutButton({ token }) {
       })
   }
 
-  const btnStyle = 'bg-[#F89236] text-black text-lg py-2 px-6 rounded md:ml-8 hover:bg-[#d1792d] duration-500'
+  const btnStyle = 'flex gap-3 bg-[#F89236] text-black text-lg py-2 px-6 rounded md:ml-8 hover:bg-[#d1792d] duration-500'
 
   return (
     <>
       {!token
         ? <a
           href='/register'
-          className={btnStyle}
+          className={`w-[9.5rem] md:w-full ${btnStyle}`}
         >
-          Sign Up
+          Sign Up <img className='text-black h-6' src='/login.svg' alt='login icon' />
         </a>
 
         : <button
           onClick={logoutAndRedirect}
-          className={`flex gap-3 ${btnStyle}`}
-        >Logout <img className='text-black h-6' src='/logout.svg' alt='' />
+          className={`${btnStyle}`}
+        >Logout <img className='text-black h-6' src='/logout.svg' alt='logout icon' />
         </button>}
 
     </>

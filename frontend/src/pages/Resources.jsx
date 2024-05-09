@@ -75,7 +75,7 @@ export default function Resources() {
         {selectCountry}
       </div>
       <main className='bg-[#A9D4E2] py-4 w-[95%] md:w-[80%] mx-auto rounded-md my-6 mb-[8rem]'>
-        {resource === null ? resource : <h1 className='text-center'>There are no resources available for this country</h1>}
+        {resource}
       </main>
 
       <Footer />

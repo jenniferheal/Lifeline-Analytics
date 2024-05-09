@@ -17,11 +17,12 @@ export default function Forms({ route, method }) {
   const [loading, setLoading] = useState(false)
   const navigate = useNavigate()
 
-  const name = (route === 'login' ? 'Login' : 'Register')
+  const name = (method === 'login' ? 'Login' : 'Register')
 
   const handleSubmit = async (e) => {
     setLoading(true)
     e.preventDefault()
+    console.log(formRoute)
 
     const response = await postLoginSignupData(formRoute, userInfo)
 
@@ -49,21 +50,21 @@ export default function Forms({ route, method }) {
 
   const haveAccount = (
     <div className='flex flex-col gap-1 items-center w-full mb-5 mx-auto text-gray-500'>
-      {route === 'login'
+      {method === 'login'
         ? <p>Don't have an account?</p>
         : <p>Already have an account?</p>}
       <a
-        href={`/${route === 'login' ? 'register' : 'login'}`}
+        href={`/${method === 'login' ? 'register' : 'login'}`}
         className='w-1/3 bg-gray-300 text-center mx-auto font-bold
       text-[#204B57] font-[Poppins] py-2 px-6
       rounded hover:bg-gray-500 hover:text-white duration-500 '
-      >{route === 'login' ? 'Sign Up' : 'Login'}
+      >{method === 'login' ? 'Sign Up' : 'Login'}
       </a>
     </div>
   )
 
   const inputClass = 'rounded-md h-[2rem] px-2 w-4/5 mx-auto'
-  const loginDivSize = route === 'login' ? 'h-[25rem]' : 'h-[29rem]'
+  const loginDivSize = method === 'login' ? 'h-[25rem]' : 'h-[29rem]'
 
   return (
     <>
@@ -104,7 +105,7 @@ export default function Forms({ route, method }) {
           className={inputClass}
         />
 
-        {route === 'signup' &&
+        {method === 'signup' &&
           <Select
             options={countries}
             name='countryCode'

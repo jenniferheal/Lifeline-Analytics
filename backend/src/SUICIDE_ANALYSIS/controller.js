@@ -56,7 +56,7 @@ const login = async (req, res) => {
     // Compare hashed password with user input
     const isPasswordValid = await bcrypt.compare(password, user.rows[0].password)
     if (!isPasswordValid) {
-      return res.status(400).json({ error: 'Invalid email or password 2' })
+      return res.status(400).json({ error: 'Invalid email or password' })
     }
 
     // Generate JWT token with user's ID
