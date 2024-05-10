@@ -59,6 +59,13 @@ const getSuicidesDataQuery = `
   ORDER BY year;
 `;
 
+const getInfoUserQuery = `
+  SELECT id, username, email, id_country
+  FROM users
+  WHERE id = $1;
+`;
+
+
 
 module.exports = {
   getSuicides,
@@ -69,6 +76,6 @@ module.exports = {
   insertTestimonialQuery,
   getAllTestimonialsQuery,
   updateUserQuery,
-  getSuicidesDataQuery
-
+  getSuicidesDataQuery,
+  getInfoUserQuery
 }

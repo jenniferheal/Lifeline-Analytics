@@ -178,7 +178,6 @@ const updateUser = async (req, res) => {
 };
 
 
-
 const getSuicidesData = async (req, res) => {
   const { id_stage, year_start, year_end, gender, id_country } = req.query;
 
@@ -200,6 +199,23 @@ const getSuicidesData = async (req, res) => {
 };
 
 
+const getInfoUser = async (req, res) => {
+  const { userId } = req.user;
+
+  try {
+    const result = await pool.query(queries.getInfoUserQuery, [userId]);
+
+    if (result.rows.length === 0) {
+      return res.status(404).json({ error: 'User not found' });
+    }
+    
+    res.status(200).json(result.rows[0]);
+  } catch (error) {
+    console.error('Error fetching user info:', error);
+    res.status(500).json({ error: 'Failed to fetch user info' });
+  }
+};
+
 
 module.exports = {
   signup,
@@ -211,5 +227,6 @@ module.exports = {
   addTestimonial,
   getAllTestimonials,
   updateUser,
-  getSuicidesData
+  getSuicidesData,
+  getInfoUser
 }

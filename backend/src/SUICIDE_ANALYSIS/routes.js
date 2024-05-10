@@ -15,5 +15,6 @@ router.get('/testimonials', controller.getAllTestimonials);
 router.post('/add-testimonial', authenticate, controller.addTestimonial);
 router.put('/update-user', authenticate, controller.updateUser);
 router.get('/suicides-data', controller.getSuicidesData);
+router.get('/user-info', authenticate, controller.getInfoUser);
 
 module.exports = router;
