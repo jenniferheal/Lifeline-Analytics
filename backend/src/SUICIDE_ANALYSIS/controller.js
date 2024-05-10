@@ -122,40 +122,40 @@ const getOneResource = (req, res) => {
   })
 }
 
-const addTestimonial = async (req, res) => {
-  const { id_user, date, testimonial, approved } = req.body
-
-  try {
-    if (!id_user || !testimonial) {
-      return res.status(400).json({ error: 'All fields are required' })
-    }
-
-    const newTestimonial = await pool.query(queries.insertTestimonialQuery, [
-      id_user,
-      testimonial
-    ])
-
-    res.status(201).json(newTestimonial.rows[0])
-  } catch (error) {
-    console.error('Error adding testimonial:', error)
-    res.status(500).json({ error: 'Failed to add testimonial' })
-  }
-}
 
 const getAllTestimonials = (req, res) => {
   pool.query(queries.getAllTestimonialsQuery, (error, results) => {
     if (error) {
-      console.error('Error fetching testimonials:', error)
-      res.status(500).json({ error: 'Failed to fetch testimonials' })
+      console.error('Error fetching testimonials:', error);
+      res.status(500).json({ error: 'Failed to fetch testimonials' });
     } else {
-      res.status(200).json(results.rows)
+      res.status(200).json(results.rows);
     }
-  })
-}
+  });
+};
+
+
+const addTestimonial = async (req, res) => {
+  const { testimonial } = req.body;
+  const id_user = req.user.userId; 
+
+  try {
+    if (!id_user || !testimonial) {
+      return res.status(400).json({ error: 'All fields are required' });
+    }
+
+    const newTestimonial = await pool.query(queries.insertTestimonialQuery, [id_user, testimonial]);
+
+    res.status(201).json(newTestimonial.rows[0]);
+  } catch (error) {
+    console.error('Error adding testimonial:', error);
+    res.status(500).json({ error: 'Failed to add testimonial' });
+  }
+};
 
 const updateUser = async (req, res) => {
-  const { id } = req.params
-  const { username, password, email, id_country } = req.body
+  const { username, password, email, id_country } = req.body;
+  const userId = req.user.userId; 
 
   try {
     const result = await pool.query(queries.updateUserQuery, [
@@ -163,19 +163,43 @@ const updateUser = async (req, res) => {
       password,
       email,
       id_country,
-      id
-    ])
+      userId 
+    ]);
 
     if (result.rows.length === 0) {
       return res.status(404).json({ error: 'User not found' })
     }
 
-    res.status(200).json(result.rows[0])
+    res.status(200).json(result.rows[0]);
   } catch (error) {
-    console.error('Error updating user:', error)
-    res.status(500).json({ error: 'Failed to update user' })
+    console.error('Error updating user:', error);
+    res.status(500).json({ error: 'Failed to update user' });
   }
-}
+};
+
+
+
+const getSuicidesData = async (req, res) => {
+  const { id_stage, year_start, year_end, gender, id_country } = req.query;
+
+  const queryParameters = [
+    id_stage || null,    
+    year_start || null,  
+    year_end || null,    
+    gender || null,      
+    id_country || null   
+  ];
+
+  try {
+    const results = await pool.query(queries.getSuicidesDataQuery, queryParameters);
+    res.status(200).json(results.rows);
+  } catch (error) {
+    console.error('Error fetching suicides data:', error.message, error.stack);
+    res.status(500).json({ error: 'Failed to fetch suicides data' });
+  }
+};
+
+
 
 module.exports = {
   signup,
@@ -186,5 +210,6 @@ module.exports = {
   getOneResource,
   addTestimonial,
   getAllTestimonials,
-  updateUser
+  updateUser,
+  getSuicidesData
 }

@@ -47,6 +47,19 @@ const getAllTestimonialsQuery = `
   SELECT * FROM testimonials WHERE approved = 1;
 `
 
+const getSuicidesDataQuery = `
+  SELECT year, SUM(suicides) AS total_suicides
+  FROM suicides
+  WHERE
+      (id_stage = $1 OR $1 IS NULL) 
+      AND (year BETWEEN $2 AND $3 OR ($2 IS NULL AND $3 IS NULL)) 
+      AND (LOWER(id_country) = LOWER($5) OR ($5 IS NULL))
+      AND (LOWER(gender) = LOWER($4) OR ($4 IS NULL AND gender = 'All'))
+  GROUP BY year
+  ORDER BY year;
+`;
+
+
 module.exports = {
   getSuicides,
   insertUserQuery,
@@ -55,5 +68,7 @@ module.exports = {
   getOneResourceQuery,
   insertTestimonialQuery,
   getAllTestimonialsQuery,
-  updateUserQuery
+  updateUserQuery,
+  getSuicidesDataQuery
+
 }
