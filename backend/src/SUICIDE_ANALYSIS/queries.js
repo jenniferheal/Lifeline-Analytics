@@ -57,15 +57,13 @@ const getSuicidesDataQuery = `
       AND (LOWER(gender) = LOWER($4) OR ($4 IS NULL AND gender = 'All'))
   GROUP BY year
   ORDER BY year;
-`;
+`
 
 const getInfoUserQuery = `
   SELECT id, username, email, id_country
   FROM users
   WHERE id = $1;
-`;
-
-
+`
 
 module.exports = {
   getSuicides,

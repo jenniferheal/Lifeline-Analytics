@@ -6,6 +6,7 @@ import Home from './pages/Home'
 import Statistics from './pages/Statistics'
 import Testimonials from './pages/Testimonials'
 import Resources from './pages/Resources'
+import EditUser from './pages/EditUser'
 
 // import ProtectedRoute from './components/ProtectedRoute'
 
@@ -33,6 +34,7 @@ function App() {
         <Route path='/login' element={<Login />} />
         <Route path='/logout' element={<Logout />} />
         <Route path='/register' element={<Register />} />
+        <Route path='/update-user' element={<EditUser />} />
         <Route path='*' element={<NotFound />} />
 
       </Routes>
