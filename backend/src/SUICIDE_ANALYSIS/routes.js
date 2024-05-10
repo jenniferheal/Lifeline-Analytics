@@ -10,5 +10,6 @@ router.post('/login', controller.login)
 router.get('/logout', controller.logout)
 router.get('/testimonials', controller.getAllTestimonials)
 router.post('/add-testimonial', controller.addTestimonial)
+router.put('/update-user/:id', controller.updateUser);
 
 module.exports = router

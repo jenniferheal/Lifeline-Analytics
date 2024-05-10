@@ -155,6 +155,32 @@ const getAllTestimonials = (req, res) => {
   });
 };
 
+
+const updateUser = async (req, res) => {
+  const { id } = req.params;
+  const { username, password, email, id_country } = req.body;
+
+  try {
+    const result = await pool.query(queries.updateUserQuery, [
+      username,
+      password,
+      email,
+      id_country,
+      id
+    ]);
+
+    if (result.rows.length === 0) {
+      return res.status(404).json({ error: 'User not found' });
+    }
+
+    res.status(200).json(result.rows[0]);
+  } catch (error) {
+    console.error('Error updating user:', error);
+    res.status(500).json({ error: 'Failed to update user' });
+  }
+};
+
+
 module.exports = {
   signup,
   login,
@@ -164,4 +190,5 @@ module.exports = {
   getOneResource,
   addTestimonial,
   getAllTestimonials,
+  updateUser
 }
