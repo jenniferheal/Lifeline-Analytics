@@ -1,16 +1,25 @@
 import { useState } from 'react'
 import LoginLogoutButton from './LoginLogoutButton'
+import UserDropdownMenu from './UserDropdownMenu'
 
 export default function Navbar() {
   const [isOpen, setIsOpen] = useState(false)
   const token = localStorage.getItem('jwtToken')
+
+  // const Links = [
+  //   { name: 'Home', link: '/' },
+  //   { name: 'Statistics', link: '/statistics' },
+  //   { name: 'Resources', link: '/resources' },
+  //   { name: 'Testimonials', link: '/testimonials' },
+  //   { name: 'Login', link: '/login' }
+  // ]
 
   const Links = [
     { name: 'Home', link: '/' },
     { name: 'Statistics', link: '/statistics' },
     { name: 'Resources', link: '/resources' },
     { name: 'Testimonials', link: '/testimonials' },
-    { name: 'Login', link: '/login' }
+    { name: 'Login', link: '/login', requiresNoToken: true }
   ]
 
   const toggleNavbar = () => {
@@ -36,13 +45,13 @@ export default function Navbar() {
 
         <ul className={`md:flex md:items-center md:pb-0 pb-12 absolute md:static bg-[#204B57] md:z-auto z-[-1] left-0 w-full md:w-auto md:pl-0 pl-9 transition-all duration-500 ease-in ${isOpen ? 'top-19 ' : 'top-[-490px]'}`}>
           {
-            Links.map((link) => (
+            Links.filter(link => !(link.requiresNoToken && token)).map((link) => (
               <li key={link.name} className='md:ml-8 text-lg md:my-0 my-7'>
                 <a href={link.link} className='text-[#A9D4E2] hover:text-gray-400 duration-500'>{link.name}</a>
               </li>
             ))
           }
-
+          {token && <UserDropdownMenu />}
           <LoginLogoutButton token={token} />
 
         </ul>
