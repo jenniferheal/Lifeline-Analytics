@@ -181,6 +181,28 @@ const updateUser = async (req, res) => {
 };
 
 
+const getSuicidesData = async (req, res) => {
+  const { id_stage, year_start, year_end, gender, id_country } = req.query;
+
+  const queryParameters = [
+    id_stage || null,    
+    year_start || null,  
+    year_end || null,    
+    gender || null,      
+    id_country || null   
+  ];
+
+  try {
+    const results = await pool.query(queries.getSuicidesDataQuery, queryParameters);
+    res.status(200).json(results.rows);
+  } catch (error) {
+    console.error('Error fetching suicides data:', error.message, error.stack);
+    res.status(500).json({ error: 'Failed to fetch suicides data' });
+  }
+};
+
+
+
 module.exports = {
   signup,
   login,
@@ -190,5 +212,6 @@ module.exports = {
   getOneResource,
   addTestimonial,
   getAllTestimonials,
-  updateUser
+  updateUser,
+  getSuicidesData
 }
