@@ -3,6 +3,7 @@ import { useNavigate } from 'react-router-dom'
 import Select from 'react-select'
 import { countries } from '../../mocks/countries'
 import { postLoginSignupData } from '../services/api'
+import HaveAnAccount from './HaveAnAccount'
 
 export default function Forms({ route, method }) {
   const [userInfo, setUserInfo] = useState({
@@ -22,7 +23,6 @@ export default function Forms({ route, method }) {
   const handleSubmit = async (e) => {
     setLoading(true)
     e.preventDefault()
-    console.log(formRoute)
 
     const response = await postLoginSignupData(formRoute, userInfo)
 
@@ -47,21 +47,6 @@ export default function Forms({ route, method }) {
   }
 
   const selectedCountry = countries.find(country => country.value === userInfo.countryCode)
-
-  const haveAccount = (
-    <div className='flex flex-col gap-1 items-center w-full mb-5 mx-auto text-gray-500'>
-      {method === 'login'
-        ? <p>Don't have an account?</p>
-        : <p>Already have an account?</p>}
-      <a
-        href={`/${method === 'login' ? 'register' : 'login'}`}
-        className='w-1/3 bg-gray-300 text-center mx-auto font-bold
-      text-[#204B57] font-[Poppins] py-2 px-6
-      rounded hover:bg-gray-500 hover:text-white duration-500 '
-      >{method === 'login' ? 'Sign Up' : 'Login'}
-      </a>
-    </div>
-  )
 
   const inputClass = 'rounded-md h-[2rem] px-2 w-4/5 mx-auto'
   const loginDivSize = method === 'login' ? 'h-[25rem]' : 'h-[29rem]'
@@ -121,7 +106,7 @@ export default function Forms({ route, method }) {
           {name}
         </button>
 
-        {haveAccount}
+        <HaveAnAccount method={method} />
 
       </form>
 
