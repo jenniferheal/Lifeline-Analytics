@@ -29,13 +29,18 @@ export async function postLoginSignupData(formRoute, userInfo) {
 }
 
 export async function updateUserData(userInfo) {
+  const updatedUserInfo = Object.fromEntries(
+    Object.entries(userInfo).map(([key, value]) => [key, value === '' ? null : value])
+  )
+
   const response = await fetch('/api/update-user', {
     method: 'PUT',
     headers: {
       'Content-Type': 'application/json',
       Authorization: `Bearer ${localStorage.getItem('jwtToken')}`
     },
-    body: JSON.stringify(userInfo)
+    body: JSON.stringify(updatedUserInfo)
   })
+
   return response
 }

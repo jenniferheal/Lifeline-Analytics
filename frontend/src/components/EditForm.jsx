@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import { useNavigate } from 'react-router-dom'
 import Select from 'react-select'
 import { countries } from '../../mocks/countries'
@@ -11,6 +11,12 @@ export default function EditForm({ route, method }) {
     password: '',
     countryCode: ''
   })
+
+  useEffect(() => {
+    fetch('/api/user-info')
+      .then((res) => res.json())
+      .then((data) => setUserInfo(data))
+  }, [])
 
   const formRoute = route
 
@@ -27,7 +33,6 @@ export default function EditForm({ route, method }) {
 
     if (response.ok) {
       const data = await response.json()
-      localStorage.setItem('jwtToken', data.token)
       navigate('/')
     } else {
       const errorData = await response.json() // Obtiene el cuerpo de la respuesta como JSON
@@ -42,13 +47,14 @@ export default function EditForm({ route, method }) {
   }
 
   const handleSelectChange = (selectedOption) => {
-    setUserInfo({ ...userInfo, countryCode: selectedOption.value })
+    setUserInfo({ ...userInfo, id_country: selectedOption.value })
   }
 
+  const defaultCountry = countries.find(country => country.value === userInfo.id_country)
   const selectedCountry = countries.find(country => country.value === userInfo.countryCode)
 
   const inputClass = 'rounded-md h-[2rem] px-2 w-4/5 mx-auto'
-  const loginDivSize = method === 'login' ? 'h-[25rem]' : 'h-[29rem]'
+  const loginDivSize = 'h-[25rem]'
 
   return (
     <>
@@ -91,8 +97,8 @@ export default function EditForm({ route, method }) {
 
         <Select
           options={countries}
+          value={userInfo.countryCode === undefined ? defaultCountry : selectedCountry}
           name='countryCode'
-          value={selectedCountry}
           onChange={handleSelectChange}
           className='w-4/5 mx-auto'
         />
