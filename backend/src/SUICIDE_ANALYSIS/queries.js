@@ -47,6 +47,10 @@ const getAllTestimonialsQuery = `
   SELECT * FROM testimonials WHERE approved = 1;
 `
 
+const getUserInfo = `
+  SELECT * FROM users WHERE id = $1;
+`
+
 module.exports = {
   getSuicides,
   insertUserQuery,
@@ -55,5 +59,6 @@ module.exports = {
   getOneResourceQuery,
   insertTestimonialQuery,
   getAllTestimonialsQuery,
-  updateUserQuery
+  updateUserQuery,
+  getUserInfo
 }

@@ -2,7 +2,7 @@ import { useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 import Select from 'react-select'
 import { countries } from '../../mocks/countries'
-import { postLoginSignupData } from '../services/api'
+import { updateUserData } from '../services/api'
 
 export default function EditForm({ route, method }) {
   const [userInfo, setUserInfo] = useState({
@@ -23,7 +23,7 @@ export default function EditForm({ route, method }) {
     setLoading(true)
     e.preventDefault()
 
-    const response = await postLoginSignupData(formRoute, userInfo)
+    const response = await updateUserData(userInfo)
 
     if (response.ok) {
       const data = await response.json()
@@ -89,14 +89,13 @@ export default function EditForm({ route, method }) {
           className={inputClass}
         />
 
-        {method === 'signup' &&
-          <Select
-            options={countries}
-            name='countryCode'
-            value={selectedCountry}
-            onChange={handleSelectChange}
-            className='w-4/5 mx-auto'
-          />}
+        <Select
+          options={countries}
+          name='countryCode'
+          value={selectedCountry}
+          onChange={handleSelectChange}
+          className='w-4/5 mx-auto'
+        />
 
         <button
           type='submit' className='bg-[#A9D4E2] w-1/3 mt-2 mx-auto font-bold text-[#204B57] text-lg font-[Poppins] py-2 px-2

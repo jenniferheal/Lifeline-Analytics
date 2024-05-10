@@ -1,14 +1,14 @@
 import Navbar from '../components/Navbar'
 import Footer from '../components/Footer'
 
-import Form from '../components/Form'
+import EditForm from '../components/EditForm'
 
 export default function EditUser() {
   return (
     <>
 
       <Navbar />
-      <Form route='/edit' method='edit' />
+      <EditForm route='/edit' method='edit' />
       <Footer />
 
     </>
