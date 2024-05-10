@@ -25,10 +25,23 @@ const getOneResourceQuery = `
   WHERE resources.id_country = $1;
 `
 
+const insertTestimonialQuery = `
+  INSERT INTO testimonials (id_user, testimonial)
+  VALUES ($1, $2)
+  RETURNING *;
+`;
+
+
+const getAllTestimonialsQuery = `
+  SELECT * FROM testimonials;
+`;
+
 module.exports = {
   getSuicides,
   insertUserQuery,
   loginUserQuery,
   getAllResourcesQuery,
-  getOneResourceQuery
+  getOneResourceQuery,
+  insertTestimonialQuery,
+  getAllTestimonialsQuery,
 }

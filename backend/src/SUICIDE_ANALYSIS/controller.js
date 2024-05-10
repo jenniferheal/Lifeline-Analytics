@@ -122,11 +122,46 @@ const getOneResource = (req, res) => {
   })
 }
 
+
+const addTestimonial = async (req, res) => {
+  const { id_user, date, testimonial, approved } = req.body;
+
+  try {
+    if (!id_user || !testimonial) {
+      return res.status(400).json({ error: 'All fields are required' });
+    }
+
+    const newTestimonial = await pool.query(queries.insertTestimonialQuery, [
+      id_user,
+      testimonial
+    ]);
+
+    res.status(201).json(newTestimonial.rows[0]);
+  } catch (error) {
+    console.error('Error adding testimonial:', error);
+    res.status(500).json({ error: 'Failed to add testimonial' });
+  }
+};
+
+
+const getAllTestimonials = (req, res) => {
+  pool.query(queries.getAllTestimonialsQuery, (error, results) => {
+    if (error) {
+      console.error('Error fetching testimonials:', error);
+      res.status(500).json({ error: 'Failed to fetch testimonials' });
+    } else {
+      res.status(200).json(results.rows);
+    }
+  });
+};
+
 module.exports = {
   signup,
   login,
   logout,
   getSuicides,
   getAllResources,
-  getOneResource
+  getOneResource,
+  addTestimonial,
+  getAllTestimonials,
 }
