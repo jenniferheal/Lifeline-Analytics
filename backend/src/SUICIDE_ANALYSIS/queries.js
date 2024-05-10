@@ -8,7 +8,6 @@ const insertUserQuery = `
   RETURNING *;
 `
 
-
 const updateUserQuery = `
   UPDATE users
   SET
@@ -18,8 +17,7 @@ const updateUserQuery = `
     id_country = COALESCE($4, id_country)
   WHERE id = $5
   RETURNING *;
-`;
-
+`
 
 const loginUserQuery = `
   SELECT * FROM users
@@ -43,13 +41,11 @@ const insertTestimonialQuery = `
   INSERT INTO testimonials (id_user, testimonial)
   VALUES ($1, $2)
   RETURNING *;
-`;
-
+`
 
 const getAllTestimonialsQuery = `
   SELECT * FROM testimonials WHERE approved = 1;
-`;
-
+`
 
 module.exports = {
   getSuicides,

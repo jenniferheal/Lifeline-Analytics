@@ -122,43 +122,40 @@ const getOneResource = (req, res) => {
   })
 }
 
-
 const addTestimonial = async (req, res) => {
-  const { id_user, date, testimonial, approved } = req.body;
+  const { id_user, date, testimonial, approved } = req.body
 
   try {
     if (!id_user || !testimonial) {
-      return res.status(400).json({ error: 'All fields are required' });
+      return res.status(400).json({ error: 'All fields are required' })
     }
 
     const newTestimonial = await pool.query(queries.insertTestimonialQuery, [
       id_user,
       testimonial
-    ]);
+    ])
 
-    res.status(201).json(newTestimonial.rows[0]);
+    res.status(201).json(newTestimonial.rows[0])
   } catch (error) {
-    console.error('Error adding testimonial:', error);
-    res.status(500).json({ error: 'Failed to add testimonial' });
+    console.error('Error adding testimonial:', error)
+    res.status(500).json({ error: 'Failed to add testimonial' })
   }
-};
-
+}
 
 const getAllTestimonials = (req, res) => {
   pool.query(queries.getAllTestimonialsQuery, (error, results) => {
     if (error) {
-      console.error('Error fetching testimonials:', error);
-      res.status(500).json({ error: 'Failed to fetch testimonials' });
+      console.error('Error fetching testimonials:', error)
+      res.status(500).json({ error: 'Failed to fetch testimonials' })
     } else {
-      res.status(200).json(results.rows);
+      res.status(200).json(results.rows)
     }
-  });
-};
-
+  })
+}
 
 const updateUser = async (req, res) => {
-  const { id } = req.params;
-  const { username, password, email, id_country } = req.body;
+  const { id } = req.params
+  const { username, password, email, id_country } = req.body
 
   try {
     const result = await pool.query(queries.updateUserQuery, [
@@ -167,19 +164,18 @@ const updateUser = async (req, res) => {
       email,
       id_country,
       id
-    ]);
+    ])
 
     if (result.rows.length === 0) {
-      return res.status(404).json({ error: 'User not found' });
+      return res.status(404).json({ error: 'User not found' })
     }
 
-    res.status(200).json(result.rows[0]);
+    res.status(200).json(result.rows[0])
   } catch (error) {
-    console.error('Error updating user:', error);
-    res.status(500).json({ error: 'Failed to update user' });
+    console.error('Error updating user:', error)
+    res.status(500).json({ error: 'Failed to update user' })
   }
-};
-
+}
 
 module.exports = {
   signup,
