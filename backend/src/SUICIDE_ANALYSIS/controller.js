@@ -78,16 +78,18 @@ const login = async (req, res) => {
 
 const logout = (req, res) => {
   try {
-    // Clear the cookie containing the JWT token
-    res.clearCookie('jwtToken')
-    // Respond with a message indicating that the user has logged out successfully
-    res.status(200).json({ message: 'User logged out successfully' })
+    res.clearCookie('jwtToken');
+    res.status(200).json({ message: 'User logged out successfully' });
+
+    if (req.user) {
+      console.log(`User ${req.user.userId} logged out successfully`);
+    }
   } catch (error) {
-    console.error('Error logging out:', error)
-    // If an error occurs, respond with a 500 status code and an error message
-    res.status(500).json({ error: 'Failed to log out' })
+    console.error('Error logging out:', error);
+    res.status(500).json({ error: 'Failed to log out' });
   }
-}
+};
+
 
 const getSuicides = (req, res) => {
   pool.query(queries.getSuicides, (error, results) => {
@@ -152,29 +154,36 @@ const addTestimonial = async (req, res) => {
 }
 
 const updateUser = async (req, res) => {
-  const { username, password, email, id_country } = req.body
-  const userId = req.user.userId
-  // const hashedPassword = await bcrypt.hash(password, 10)
+  const { username, password, email, id_country } = req.body;
+  const userId = req.user.userId; // Obtén el ID del token JWT.
 
   try {
-    const result = await pool.query(queries.updateUserQuery, [
-      username,
-      password,
-      email,
-      id_country,
-      userId
-    ])
 
-    if (result.rows.length === 0) {
-      return res.status(404).json({ error: 'User not found' })
+    let hashedPassword;
+    if (password) {
+      const saltRounds = 10;
+      hashedPassword = await bcrypt.hash(password, saltRounds); 
     }
 
-    res.status(200).json(result.rows[0])
+
+    const result = await pool.query(queries.updateUserQuery, [
+      username,
+      hashedPassword || null, 
+      email,
+      id_country,
+      userId 
+    ]);
+
+    if (result.rows.length === 0) {
+      return res.status(404).json({ error: 'User not found' });
+    }
+
+    res.status(200).json(result.rows[0]);
   } catch (error) {
-    console.error('Error updating user:', error)
-    res.status(500).json({ error: 'Failed to update user' })
+    console.error('Error updating user:', error);
+    res.status(500).json({ error: 'Failed to update user' });
   }
-}
+};
 
 const getSuicidesData = async (req, res) => {
   const { id_stage, year_start, year_end, gender, id_country } = req.query
