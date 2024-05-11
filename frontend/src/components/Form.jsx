@@ -33,7 +33,7 @@ export default function Forms({ route, method }) {
     } else {
       const errorData = await response.json() // Obtiene el cuerpo de la respuesta como JSON
       console.error('Error:', response.status, response.statusText, errorData.error)
-      // Aquí puedes manejar los errores
+      location.reload()
     }
   }
 
@@ -56,9 +56,9 @@ export default function Forms({ route, method }) {
       <form
         onSubmit={handleSubmit}
         className={`flex flex-col gap-6 md:w-[50%] w-[80%] ${loginDivSize} md:mt-20 mt-10 mx-auto bg-[#96AFB8] 
-         rounded-md `}
+         rounded-md shadow-md`}
       >
-        <div className='bg-[#334A52] h-[3rem] rounded-t-md'>
+        <div className='bg-[#334A52] h-[4.5rem] rounded-t-md'>
           <h1 className='text-4xl text-center text-white font-semibold'>{name}</h1>
         </div>
         <div />
@@ -101,7 +101,7 @@ export default function Forms({ route, method }) {
 
         <button
           type='submit' className='bg-[#A9D4E2] w-1/3 mt-2 mx-auto font-bold text-[#204B57] text-lg font-[Poppins] py-2 px-2
-            rounded hover:bg-[#d1792d] duration-500 '
+            rounded shadow-md hover:bg-[#d1792d] duration-500 '
         >
           {name}
         </button>

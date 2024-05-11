@@ -30,7 +30,7 @@ const signup = async (req, res) => {
     const newUser = await pool.query(queries.insertUserQuery, [username, hashedPassword, email, countryCode])
 
     // Generate a JWT token
-    const token = jwt.sign({ userId: newUser.rows[0].id }, process.env.secretKey)
+    const token = jwt.sign({ userId: newUser.rows[0].id }, process.env.secretKey, { expiresIn: '24h' })
 
     // Set the JWT token as a cookie
     res.cookie('jwtToken', token, { httpOnly: true })
@@ -60,7 +60,7 @@ const login = async (req, res) => {
     }
 
     // Generate JWT token with user's ID
-    const token = jwt.sign({ userId: user.rows[0].id }, process.env.secretKey)
+    const token = jwt.sign({ userId: user.rows[0].id }, process.env.secretKey, { expiresIn: '24h' })
 
     // Set cookie with generated token
     res.cookie('jwtToken', token, { httpOnly: true })

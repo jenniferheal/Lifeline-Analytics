@@ -105,7 +105,7 @@ export default function EditForm({ route, method }) {
 
         <button
           type='submit' className='bg-[#A9D4E2] w-2/4 mt-2 mx-auto font-bold text-[#204B57] text-lg font-[Poppins] py-2 px-2
-            rounded hover:bg-[#d1792d] duration-500 '
+             shadow-md hover:bg-[#d1792d] duration-500 '
         >
           {name}
         </button>

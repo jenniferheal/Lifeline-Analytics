@@ -8,8 +8,7 @@ import Testimonials from './pages/Testimonials'
 import Resources from './pages/Resources'
 import EditUser from './pages/EditUser'
 import AddTestimonial from './pages/AddTestimonial'
-
-// import ProtectedRoute from './components/ProtectedRoute'
+import ProtectedRoute from './components/ProtectedRoute'
 
 function Logout() {
   localStorage.clear()
@@ -31,12 +30,24 @@ function App() {
         />
         <Route path='/statistics' element={<Statistics />} />
         <Route path='/testimonials' element={<Testimonials />} />
-        <Route path='/add-testimonial' element={<AddTestimonial />} />
+        <Route
+          path='/add-testimonial' element={
+            <ProtectedRoute>
+              <AddTestimonial />
+            </ProtectedRoute>
+          }
+        />
         <Route path='/resources' element={<Resources />} />
         <Route path='/login' element={<Login />} />
         <Route path='/logout' element={<Logout />} />
-        <Route path='/register' element={<Register />} />
-        <Route path='/update-user' element={<EditUser />} />
+        <Route path='/register' element={<RegisterAndLogout />} />
+        <Route
+          path='/update-user' element={
+            <ProtectedRoute>
+              <EditUser />
+            </ProtectedRoute>
+          }
+        />
         <Route path='*' element={<NotFound />} />
 
       </Routes>
