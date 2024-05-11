@@ -7,6 +7,7 @@ import Statistics from './pages/Statistics'
 import Testimonials from './pages/Testimonials'
 import Resources from './pages/Resources'
 import EditUser from './pages/EditUser'
+import AddTestimonial from './pages/AddTestimonial'
 
 // import ProtectedRoute from './components/ProtectedRoute'
 
@@ -30,6 +31,7 @@ function App() {
         />
         <Route path='/statistics' element={<Statistics />} />
         <Route path='/testimonials' element={<Testimonials />} />
+        <Route path='/add-testimonial' element={<AddTestimonial />} />
         <Route path='/resources' element={<Resources />} />
         <Route path='/login' element={<Login />} />
         <Route path='/logout' element={<Logout />} />

@@ -44,3 +44,15 @@ export async function updateUserData(userInfo) {
 
   return response
 }
+
+export async function postTestimonial(testimonial) {
+  const response = await fetch('/api/add-testimonial', {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json',
+      Authorization: `Bearer ${localStorage.getItem('jwtToken')}`
+    },
+    body: JSON.stringify(testimonial)
+  })
+  return response
+}
