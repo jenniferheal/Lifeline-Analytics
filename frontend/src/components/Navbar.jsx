@@ -6,14 +6,6 @@ export default function Navbar() {
   const [isOpen, setIsOpen] = useState(false)
   const token = localStorage.getItem('jwtToken')
 
-  // const Links = [
-  //   { name: 'Home', link: '/' },
-  //   { name: 'Statistics', link: '/statistics' },
-  //   { name: 'Resources', link: '/resources' },
-  //   { name: 'Testimonials', link: '/testimonials' },
-  //   { name: 'Login', link: '/login' }
-  // ]
-
   const Links = [
     { name: 'Home', link: '/' },
     { name: 'Statistics', link: '/statistics' },

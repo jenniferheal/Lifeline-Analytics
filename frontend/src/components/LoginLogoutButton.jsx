@@ -14,7 +14,7 @@ export default function LoginLogoutButton({ token }) {
       })
   }
 
-  const btnStyle = 'flex gap-3 bg-[#F89236] text-black text-lg py-2 px-6 rounded md:ml-8 hover:bg-[#d1792d] duration-500'
+  const btnStyle = 'flex gap-3 font-title bg-[#F89236] text-black text-lg py-2 px-6 rounded md:ml-8 hover:bg-[#d1792d] duration-500'
 
   return (
     <>

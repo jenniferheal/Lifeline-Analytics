@@ -17,6 +17,10 @@ module.exports = {
       }
     },
     extend: {
+      fontFamily: {
+        title: ['DM Serif Display', 'serif'],
+        body: ['Roboto', 'sans-serif']
+      },
       colors: {
         border: 'hsl(var(--border))',
         input: 'hsl(var(--input))',

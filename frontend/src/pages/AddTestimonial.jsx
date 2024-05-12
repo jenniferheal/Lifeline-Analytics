@@ -38,13 +38,13 @@ export default function AddTestimonial() {
         <textarea
           name='testimonial' rows={10} id=''
           placeholder='Write your testimonial here...'
-          className='w-[80%] mx-auto rounded-md p-4'
+          className='w-[80%] font-body mx-auto rounded-md p-4'
           value={testimonial.testimonial}
           onChange={handleTestimonialChange}
         />
 
         <button
-          type='submit' className='bg-[#A9D4E2] w-2/4 mt-2 mx-auto font-bold text-[#204B57] text-lg font-[Poppins] py-2 px-2
+          type='submit' className='bg-[#A9D4E2] w-2/4 mt-2 mx-auto font-bold text-[#204B57] text-lg  py-2 px-2
             rounded hover:bg-[#d1792d] duration-500 '
         >
           Save

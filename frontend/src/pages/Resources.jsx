@@ -38,7 +38,7 @@ export default function Resources() {
               <p className='my-3 text-justify'>{resource.description}</p>
               <div className='flex justify-end'>
                 <a
-                  href={resource.link} target='_blank' className='bg-[#204B57] font-bold text-[#F1F1E6] text-md font-[Poppins] py-2 px-2
+                  href={resource.link} target='_blank' className='bg-[#204B57] font-title text-[#F1F1E6] text-md  py-2 px-2
     rounded shadow-md hover:bg-[#d1792d] duration-500 ' rel='noreferrer'
                 >View Help
                 </a>
@@ -69,9 +69,9 @@ export default function Resources() {
   return (
     <>
       <Navbar />
-      <h1 className='text-center text-6xl my-8'>Resources</h1>
+      <h1 className='font-title text-center text-6xl my-8'>Resources</h1>
       <div className='flex flex-col items-end w-[80%] mx-auto'>
-        <h2 className='text-xl text-slate-600 mb-3 '>Filter by Country</h2>
+        <p className='text-xl text-slate-600 mb-3 '>Filter by Country</p>
         {selectCountry}
       </div>
       <main className='bg-[#A9D4E2] py-4 w-[95%] md:w-[80%] mx-auto rounded-md my-6 mb-[8rem]'>

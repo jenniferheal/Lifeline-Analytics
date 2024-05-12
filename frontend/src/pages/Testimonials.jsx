@@ -34,7 +34,7 @@ export default function Testimonials() {
                   <h2 className='text-xl font-bold mb-2'>Anonymus</h2>
                   <span className='text-slate-600'>{formattedDate}</span>
                 </div>
-                <p className='text-lg text-justify'>{testimonial.testimonial}</p>
+                <p className='md:text-lg text-justify'>{testimonial.testimonial}</p>
               </article>
             )
           })

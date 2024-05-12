@@ -55,7 +55,7 @@ export default function Forms({ route, method }) {
     <>
       <form
         onSubmit={handleSubmit}
-        className={`flex flex-col gap-6 md:w-[50%] w-[80%] ${loginDivSize} md:mt-20 mt-10 mx-auto bg-[#96AFB8] 
+        className={`flex flex-col font-body gap-6 md:w-[50%] w-[80%] ${loginDivSize} md:mt-20 mt-10 mx-auto bg-[#96AFB8] 
          rounded-md shadow-md`}
       >
         <div className='bg-[#334A52] h-[4.5rem] rounded-t-md'>
@@ -100,7 +100,7 @@ export default function Forms({ route, method }) {
           />}
 
         <button
-          type='submit' className='bg-[#A9D4E2] w-1/3 mt-2 mx-auto font-bold text-[#204B57] text-lg font-[Poppins] py-2 px-2
+          type='submit' className='bg-[#A9D4E2] w-1/3 mt-2 mx-auto font-bold text-[#204B57] text-lg  py-2 px-2
             rounded shadow-md hover:bg-[#d1792d] duration-500 '
         >
           {name}
