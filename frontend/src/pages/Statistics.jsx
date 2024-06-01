@@ -1,8 +1,4 @@
-import Navbar from '../components/Navbar'
-import Footer from '../components/Footer'
 import LineGraph from '@/components/LineGraph'
-import BarGraph from '@/components/BarGraph'
-import PieChart from '@/components/PieChart'
 import { useState, useEffect } from 'react'
 import Select from 'react-select'
 import { countriesForResources } from '../../mocks/countries'
@@ -43,7 +39,6 @@ export default function Statistics() {
 
   return (
     <>
-      <Navbar />
       <h1 className='font-title text-center text-6xl my-8'>Statistics</h1>
       <main className='mx-auto w-[95%] md:w-[85%] my-6 mb-[8rem] pt-6'>
         <div className='flex flex-wrap gap-4 md:gap-3 justify-evenly md:justify-evenly w-[100%] mx-auto mb-8 md:my-8'>
@@ -94,7 +89,6 @@ export default function Statistics() {
         <LineGraph suicidesData={suicidesData} />
 
       </main>
-      <Footer />
     </>
   )
 }

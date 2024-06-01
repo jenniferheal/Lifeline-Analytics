@@ -1,5 +1,3 @@
-import Navbar from '../components/Navbar'
-import Footer from '../components/Footer'
 import { useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 import { postTestimonial } from '../services/api'
@@ -25,7 +23,6 @@ export default function AddTestimonial() {
   }
   return (
     <>
-      <Navbar />
       <form
         onSubmit={handleSubmit}
         className='flex flex-col gap-6 md:w-[75%] w-[90%] h-[30rem] md:mt-20 mt-10 mx-auto bg-[#96AFB8] rounded-md mb-[8rem]'
@@ -51,7 +48,6 @@ export default function AddTestimonial() {
         </button>
 
       </form>
-      <Footer />
     </>
   )
 }
