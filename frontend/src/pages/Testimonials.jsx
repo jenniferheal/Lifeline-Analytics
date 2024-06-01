@@ -1,5 +1,3 @@
-import Navbar from '../components/Navbar'
-import Footer from '../components/Footer'
 import { useEffect, useState } from 'react'
 import { CirclePlus } from 'lucide-react'
 
@@ -19,7 +17,6 @@ export default function Testimonials() {
 
   return (
     <>
-      <Navbar />
       <h1 className='text-center text-6xl my-8'>Testimonials</h1>
       <p className='flex justify-end my-6 w-[85%] md:w-[70%] mx-auto text-center'><a href='/add-testimonial' className='flex md:gap-2 font-bold text-[#204B57] hover:text-[#F89236] duration-500'><CirclePlus className='size-8 md:size-6' /><span className='hidden md:inline'>Add Testimonial</span></a>
       </p>
@@ -42,7 +39,6 @@ export default function Testimonials() {
             <h1 className='text-xl text-center'>There are no testimonials available</h1>
           </article>)}
       </main>
-      <Footer />
     </>
   )
 }

@@ -9,6 +9,8 @@ import Resources from './pages/Resources'
 import EditUser from './pages/EditUser'
 import AddTestimonial from './pages/AddTestimonial'
 import ProtectedRoute from './components/ProtectedRoute'
+import Navbar from './components/Navbar'
+import Footer from './components/Footer'
 
 function Logout() {
   localStorage.clear()
@@ -23,6 +25,7 @@ function RegisterAndLogout() {
 function App() {
   return (
     <BrowserRouter>
+      <Navbar />
       <Routes>
         <Route
           path='/'
@@ -51,6 +54,7 @@ function App() {
         <Route path='*' element={<NotFound />} />
 
       </Routes>
+      <Footer />
     </BrowserRouter>
   )
 }

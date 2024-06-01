@@ -1,5 +1,3 @@
-import Navbar from '../components/Navbar'
-import Footer from '../components/Footer'
 import getCountryISO2 from 'country-iso-3-to-2'
 import { useEffect, useState } from 'react'
 import { countriesForResources } from '../../mocks/countries'
@@ -68,7 +66,6 @@ export default function Resources() {
 
   return (
     <>
-      <Navbar />
       <h1 className='font-title text-center text-6xl my-8'>Resources</h1>
       <div className='flex flex-col items-end w-[80%] mx-auto'>
         <p className='text-xl text-slate-600 mb-3 '>Filter by Country</p>
@@ -77,8 +74,6 @@ export default function Resources() {
       <main className='bg-[#A9D4E2] py-4 w-[95%] md:w-[80%] mx-auto rounded-md my-6 mb-[8rem]'>
         {resource}
       </main>
-
-      <Footer />
     </>
   )
 }
