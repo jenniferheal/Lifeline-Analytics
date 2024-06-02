@@ -1,4 +1,4 @@
-import { useNavigate } from 'react-router-dom'
+import { useNavigate, Link } from 'react-router-dom'
 import { handleLogout } from '../services/api'
 
 export default function LoginLogoutButton({ token }) {
@@ -19,12 +19,12 @@ export default function LoginLogoutButton({ token }) {
   return (
     <>
       {!token
-        ? <a
-          href='/register'
+        ? <Link
+          to='/register'
           className={`w-[9.5rem] md:w-full ${btnStyle}`}
         >
           Sign Up <img className='text-black h-6' src='/login.svg' alt='login icon' />
-        </a>
+        </Link>
 
         : <button
           onClick={logoutAndRedirect}

@@ -6,6 +6,7 @@ import {
   DropdownMenuSeparator,
   DropdownMenuTrigger
 } from '@/components/ui/dropdown-menu'
+import { Link } from 'react-router-dom'
 
 import { User } from 'lucide-react'
 
@@ -18,10 +19,10 @@ export default function UserDropdownMenu() {
           <DropdownMenuLabel>My Account</DropdownMenuLabel>
           <DropdownMenuSeparator />
           <DropdownMenuItem>
-            <a href='/update-user'>Edit Profile</a>
+            <Link to='/update-user'>Edit Profile</Link>
           </DropdownMenuItem>
           <DropdownMenuItem>
-            <a href='/add-testimonial'>Add Testimonial</a>
+            <Link to='/add-testimonial'>Add Testimonial</Link>
           </DropdownMenuItem>
         </DropdownMenuContent>
       </DropdownMenu>
