@@ -1,6 +1,7 @@
 import { useState } from 'react'
 import LoginLogoutButton from './LoginLogoutButton'
 import UserDropdownMenu from './UserDropdownMenu'
+import { Link } from 'react-router-dom'
 
 export default function Navbar() {
   const [isOpen, setIsOpen] = useState(false)
@@ -28,7 +29,7 @@ export default function Navbar() {
     <div className='shadow-md w-full sticky top-0 left-0 z-50'>
       <div className='md:flex items-center justify-between bg-[#204B57] py-4 md:px-10 px-7'>
         <div className='font-bold text-xl cursor-pointer flex items-center text-[#F1F1E6]'>
-          <img className='w-[3rem]' src='/logo.png' alt='logo lifeline analytics' />
+          <Link to='/'><img className='w-[3rem]' src='/logo.png' alt='logo lifeline analytics' /></Link>
         </div>
 
         <div onClick={toggleNavbar} className='text-3xl absolute right-8 top-5 cursor-pointer md:hidden'>
@@ -39,7 +40,7 @@ export default function Navbar() {
           {
             Links.filter(link => !(link.requiresNoToken && token)).map((link) => (
               <li key={link.name} className='md:ml-8 text-lg md:my-0 my-7'>
-                <a href={link.link} className='text-[#A9D4E2] hover:text-gray-400 duration-500'>{link.name}</a>
+                <Link to={link.link} className='text-[#A9D4E2] hover:text-gray-400 duration-500'>{link.name}</Link>
               </li>
             ))
           }
